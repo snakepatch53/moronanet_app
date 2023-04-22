@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import { APP_LOGO_URI } from "@env";
+import { APP_LOGO_URI, APP_PET2_URI } from "@env";
 
 // components
 import LoadScreen from "../components/LoadScreen";
@@ -9,7 +9,7 @@ export default Home = ({ session }) => {
     return (
         <View style={styles.container}>
             <View style={styles.title}>
-                <Image style={styles.title_image} source={{ uri: APP_LOGO_URI }} />
+                <Image style={styles.title_image} source={{ uri: APP_PET2_URI }} />
                 <View style={styles.menssage}>
                     <Text style={styles.message_text}>Hola</Text>
                     <Text style={[styles.message_text, styles.message_username]}>{session.nombre}</Text>
@@ -23,16 +23,20 @@ export default Home = ({ session }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "#fff",
+        padding: 20,
     },
     title: {
         alignItems: "center",
         justifyContent: "center",
-        padding: 10,
+        textAlign: "center",
+        gap: 10,
     },
     title_image: {
-        width: 130,
-        height: 130,
+        width: 200,
+        height: 250,
         borderRadius: 200,
         objectFit: "contain",
     },
@@ -40,16 +44,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
+        textAlign: "center",
         flexWrap: "wrap",
         columnGap: 5,
     },
     message_text: {
-        fontSize: 15,
-        lineHeight: 18,
-        fontWeight: "bold",
-        color: "#0378c0",
+        fontSize: 16,
+        textAlign: "center",
+        color: "#646464",
     },
     message_username: {
-        color: "#000",
+        fontWeight: "bold",
     },
 });

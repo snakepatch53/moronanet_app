@@ -5,7 +5,7 @@ import Main from "./src/screens/Main.jsx";
 
 export default function App() {
     return (
-        <NativeRouter style={styles.container} initialEntries={["/home"]}>
+        <NativeRouter style={styles.container} initialEntries={["/perfil"]}>
             <Main />
         </NativeRouter>
     );
