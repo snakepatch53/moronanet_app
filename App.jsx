@@ -1,12 +1,13 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { NativeRouter } from "react-router-native";
+
+import Main from "./src/screens/Main.jsx";
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <Text>Ya funciono xd!jijsi!</Text>
-            <StatusBar style="auto" />
-        </View>
+        <NativeRouter style={styles.container} initialEntries={["/home"]}>
+            <Main />
+        </NativeRouter>
     );
 }
 
