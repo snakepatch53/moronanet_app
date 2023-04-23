@@ -1,6 +1,6 @@
 {
     "expo": {
-        "name": "moronanet_app",
+        "name": "Clientes Moronanet",
         "slug": "moronanet_app",
         "version": "1.0.0",
         "orientation": "portrait",
@@ -13,16 +13,23 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "moronanet"
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
+                "foregroundImage": "./assets/app_icon.png",
                 "backgroundColor": "#ffffff"
-            }
+            },
+            "package": "com.snakepatch53.moronanet_app"
         },
         "web": {
             "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "5c8390af-345a-4d2c-8d4f-3f1d31c1e254"
+            }
         }
     }
 }

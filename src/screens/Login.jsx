@@ -52,28 +52,6 @@ const Login = ({ setSession }) => {
     );
 };
 
-algo = {
-    datos: [
-        {
-            cedula: "0704870377",
-            codigo: "while(!vida)",
-            correo: "snakepatch53@gmail.com",
-            direccion_principal: "barrio 27 de febrero",
-            estado: "ACTIVO",
-            facturacion: [Object],
-            fecha_suspendido: "2022-11-07 02:30:03",
-            id: 117,
-            mantenimiento: false,
-            movil: "0959999086",
-            nombre: "Harold Hernández",
-            pasarela: "",
-            servicios: [Array],
-            telefono: "",
-        },
-    ],
-    estado: "exito",
-};
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
