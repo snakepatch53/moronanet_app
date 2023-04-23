@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Constants from "expo-constants";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useLocation } from "react-router-native";
@@ -6,6 +6,17 @@ import { useLocation } from "react-router-native";
 export default function Header({ session, handleLogout, navigate }) {
     const location = useLocation();
     const active = location.pathname;
+
+    // configuracion del statusbar
+    StatusBar.setTranslucent(true);
+    if (active == "/login") {
+        StatusBar.setBackgroundColor("#ffffff");
+        StatusBar.setBarStyle("dark-content");
+    } else {
+        StatusBar.setBackgroundColor("#0378c0");
+        StatusBar.setBarStyle("light-content");
+    }
+
     if (active === "/login") return null;
 
     let user_nombre = "";
@@ -39,6 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#0378c0",
         paddingHorizontal: 15,
         paddingTop: Constants.statusBarHeight + 10,
+        // paddingTop: 10,
         paddingBottom: 20,
     },
     user_container: {
