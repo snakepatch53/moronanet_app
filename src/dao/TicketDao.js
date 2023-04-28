@@ -4,7 +4,7 @@ import { fetch_query } from "./fetch_query";
 // api querys
 export async function selectByClientId(idcliente) {
     const tickets = await fetch_query("ListTicket", { idcliente });
-    if (tickets.estado == "error") return null;
+    if (tickets.estado == "error") return false;
     return tickets.data;
 }
 

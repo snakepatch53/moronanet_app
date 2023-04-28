@@ -12,7 +12,7 @@ export default Tickets = ({ session }) => {
     useEffect(() => {
         selectByClientId(session.id).then((res) => setTickets(res));
     }, []);
-    if (!tickets) return <LoadScreen />;
+    if (tickets == null) return <LoadScreen />;
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Mis Tickets</Text>
@@ -36,7 +36,11 @@ export default Tickets = ({ session }) => {
                     <Text style={styles.tickets_state_number}>{tickets.respondidos}</Text>
                 </View>
             </View>
-            <FlatList style={styles.list} data={tickets.tickets} renderItem={({ item }) => <TicketItem ticket={item} />} />
+            {tickets == false ? (
+                <Text style={{ textAlign: "center", marginVertical: 10 }}>Sin tickets registrados</Text>
+            ) : (
+                <FlatList style={styles.list} data={tickets.tickets} renderItem={({ item }) => <TicketItem ticket={item} />} />
+            )}
 
             <Link to={"/formticket"} style={styles.add_btn} underlayColor="#ddd" component={TouchableOpacity}>
                 <Icon style={styles.add_btn_icon} name="add" />
