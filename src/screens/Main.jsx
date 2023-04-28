@@ -10,6 +10,12 @@ import Home from "./Home.jsx";
 import Servicios from "./Servicios";
 import Servicio from "./Servicio";
 import Perfil from "./Perfil";
+import Facturas from "./Facturas";
+import Factura from "./Factura";
+import Tickets from "./Tickets";
+import Ticket from "./Ticket";
+import FormTicket from "./FormTicket";
+import SendedTicket from "./SendedTicket";
 
 export default Main = () => {
     const [session, setSession] = useState(null);
@@ -30,10 +36,13 @@ export default Main = () => {
                     <Route path="/home" element={<Home session={session} />} />
                     <Route path="/servicios" element={<Servicios session={session} />} />
                     <Route path="/servicio/:id" element={<Servicio session={session} />} />
-                    <Route path="/facturas" element={<Home />} />
-                    <Route path="/tickets" element={<Home />} />
+                    <Route path="/facturas" element={<Facturas session={session} />} />
+                    <Route path="/factura/:id" element={<Factura session={session} />} />
+                    <Route path="/tickets" element={<Tickets session={session} />} />
+                    <Route path="/ticket/:id" element={<Ticket session={session} />} />
+                    <Route path="/formticket" exact element={<FormTicket session={session} navigate={navigate} />} />
+                    <Route path="/sendedticket" exact element={<SendedTicket session={session} navigate={navigate} />} />
                     <Route path="/perfil" element={<Perfil session={session} />} />
-                    {/* <Route path="/" element={<Home />} /> */}
                 </Routes>
             </View>
             <NavBar />

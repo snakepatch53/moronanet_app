@@ -30,7 +30,18 @@ export async function logout(navigate, setSession) {
 
 export async function getSession(setSession) {
     const session = await AsyncStorage.getItem("@session");
-    if (session) return setSession(JSON.parse(session));
+    if (session) {
+        const _session = JSON.parse(session);
+        // primero ponermos el nombre en minusculas
+        _session.nombre = _session.nombre.toLowerCase();
+        // quitar las palabras "(factura)" "(recibo)"
+        _session.nombre = _session.nombre.replace("(factura)", "");
+        _session.nombre = _session.nombre.replace("(recibo)", "");
+        // capitalizar nombre
+        _session.nombre = _session.nombre.charAt(0).toUpperCase() + _session.nombre.slice(1);
+
+        return setSession(_session);
+    }
     return null;
 }
 

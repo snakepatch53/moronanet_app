@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         borderTopColor: "#ccc",
         borderTopWidth: 0.2,
-        backgroundColor: "rgba(0,0,0,0.02)",
+        backgroundColor: "#f6f6f6",
+        // backgroundColor: "rgba(0, 0, 0, 0.1)",
     },
     item: {
         flex: 1,
