@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import { useParams } from "react-router-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Link, useParams } from "react-router-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { schematizeService } from "../dao/ServicioDao";
 import LoadScreen from "../components/LoadScreen";
@@ -26,53 +26,63 @@ export default function Servicio({ session }) {
     const tiempo_transcurrido = moment().diff(servicio.instalado, "months");
 
     return (
-        <View style={styles.container}>
-            <View style={styles.icon_container}>
-                <Icon style={styles.icon} name={servicio.icon_nombre} />
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.icon_container}>
+                    <Icon style={styles.icon} name={servicio.icon_nombre} />
+                </View>
+                <Text style={styles.title}>Plan {servicio.plan_nombre}</Text>
+                <View style={styles.items}>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="speed" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Velocidad:</Text>
+                            <Text style={styles.item_desc}>{servicio.plan_megas} Megas</Text>
+                        </View>
+                        <View style={styles.item}>
+                            <Icon name="check-circle-outline" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Estado:</Text>
+                            {/* <Text style={styles.item_desc}>{session.estado}</Text> */}
+                            <Text style={styles.item_desc}>{servicio.status_user.toLowerCase()}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="attach-money" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Mensual:</Text>
+                            <Text style={styles.item_desc}>{servicio.costo}</Text>
+                        </View>
+                        <View style={styles.item}>
+                            <Icon name="event-note" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Contratado:</Text>
+                            <Text style={styles.item_desc}>{moment(servicio.instalado).format("dddd D, MMMM YYYY")}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="payment" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Próximo pago:</Text>
+                            <Text style={styles.item_desc}>{fecha_pago}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="place" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Direción:</Text>
+                            <Text style={styles.item_desc}>{servicio.direccion}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <Link style={styles.button} to={"/contract/" + servicio.id} underlayColor="#266acc" component={TouchableOpacity}>
+                            <>
+                                <Text style={styles.button_text}>Ver Contrato</Text>
+                                <Icon name="description" style={styles.button_icon} />
+                            </>
+                        </Link>
+                    </View>
+                </View>
             </View>
-            <Text style={styles.title}>Plan {servicio.plan_nombre}</Text>
-            <View style={styles.items}>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="speed" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Velocidad:</Text>
-                        <Text style={styles.item_desc}>{servicio.plan_megas} Megas</Text>
-                    </View>
-                    <View style={styles.item}>
-                        <Icon name="check-circle-outline" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Estado:</Text>
-                        {/* <Text style={styles.item_desc}>{session.estado}</Text> */}
-                        <Text style={styles.item_desc}>{servicio.status_user.toLowerCase()}</Text>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="attach-money" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Mensual:</Text>
-                        <Text style={styles.item_desc}>{servicio.costo}</Text>
-                    </View>
-                    <View style={styles.item}>
-                        <Icon name="event-note" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Contratado:</Text>
-                        <Text style={styles.item_desc}>{moment(servicio.instalado).format("dddd D, MMMM YYYY")}</Text>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="payment" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Próximo pago:</Text>
-                        <Text style={styles.item_desc}>{fecha_pago}</Text>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="place" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Direción:</Text>
-                        <Text style={styles.item_desc}>{servicio.direccion}</Text>
-                    </View>
-                </View>
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -82,6 +92,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
+        paddingTop: 20,
     },
     title: {
         fontSize: 18,
@@ -144,5 +155,28 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: "bold",
         color: "#2d7cee",
+    },
+    button: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingHorizontal: 5,
+        paddingVertical: 15,
+        marginTop: 20,
+        borderRadius: 10,
+        backgroundColor: "#2d7cee",
+        shadowColor: "#908f8f",
+        elevation: 5,
+    },
+    button_text: {
+        fontSize: 14,
+        fontWeight: "bold",
+        color: "#fff",
+    },
+    button_icon: {
+        fontSize: 20,
+        color: "#fff",
+        marginLeft: 5,
     },
 });

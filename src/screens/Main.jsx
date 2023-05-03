@@ -16,6 +16,7 @@ import Tickets from "./Tickets";
 import Ticket from "./Ticket";
 import FormTicket from "./FormTicket";
 import SendedTicket from "./SendedTicket";
+import Contract from "./Contract";
 
 export default Main = () => {
     const [session, setSession] = useState(null);
@@ -36,6 +37,7 @@ export default Main = () => {
                     <Route path="/home" element={<Home session={session} />} />
                     <Route path="/servicios" element={<Servicios session={session} />} />
                     <Route path="/servicio/:id" element={<Servicio session={session} />} />
+                    <Route path="/contract/:id" element={<Contract session={session} />} />
                     <Route path="/facturas" element={<Facturas session={session} />} />
                     <Route path="/factura/:id" element={<Factura session={session} />} />
                     <Route path="/tickets" element={<Tickets session={session} />} />

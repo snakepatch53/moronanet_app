@@ -25,7 +25,11 @@ export default function Header({ session, handleLogout, navigate }) {
     return (
         <View style={styles.container}>
             <View style={styles.user_container}>
-                {active.includes("/servicio/") || active.includes("/factura/") || active.includes("/formticket") || active.includes("/ticket/") ? (
+                {active.includes("/servicio/") ||
+                active.includes("/contract/") ||
+                active.includes("/factura/") ||
+                active.includes("/formticket") ||
+                active.includes("/ticket/") ? (
                     <TouchableOpacity onPress={handleBack}>
                         <Icon style={styles.icon} name="arrow-back" />
                     </TouchableOpacity>

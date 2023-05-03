@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { APP_LOGO_URI, APP_PET2_URI } from "@env";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 // components
 import LoadScreen from "../components/LoadScreen";
+import { Link } from "react-router-native";
 
 export default Home = ({ session }) => {
     if (!session) return <LoadScreen />;
@@ -14,6 +16,12 @@ export default Home = ({ session }) => {
                     <Text style={styles.message_text}>Hola</Text>
                     <Text style={[styles.message_text, styles.message_username]}>{session.nombre}</Text>
                     <Text style={styles.message_text}> bienvenido al portal de Moronanet</Text>
+                    <Link style={styles.button} to={"/contract/" + session.id} underlayColor="#266acc" component={TouchableOpacity}>
+                        <>
+                            <Text style={styles.button_text}>Ver contrato</Text>
+                            <Icon name="description" style={styles.button_icon} />
+                        </>
+                    </Link>
                 </View>
             </View>
         </View>
@@ -55,5 +63,24 @@ const styles = StyleSheet.create({
     },
     message_username: {
         fontWeight: "bold",
+    },
+    button: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 3,
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        marginTop: 40,
+        borderRadius: 5,
+        backgroundColor: "#2d7cee",
+    },
+    button_text: {
+        fontSize: 16,
+        color: "#fff",
+    },
+    button_icon: {
+        fontSize: 20,
+        color: "#fff",
     },
 });
