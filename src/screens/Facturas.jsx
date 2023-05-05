@@ -9,11 +9,15 @@ export default Facturas = ({ session }) => {
     useEffect(() => {
         selectByClientId(session.id).then((res) => setFacturas(res));
     }, []);
-    if (!facturas) return <LoadScreen />;
+    if (facturas == null) return <LoadScreen />;
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Mis Facturas</Text>
-            <FlatList style={styles.list} data={facturas} renderItem={({ item }) => <FacturaItem factura={item} />} />
+            {facturas == false ? (
+                <Text style={{ textAlign: "center", marginVertical: 10 }}>Sin facturas registradas</Text>
+            ) : (
+                <FlatList style={styles.list} data={facturas} renderItem={({ item }) => <FacturaItem factura={item} />} />
+            )}
         </View>
     );
 };

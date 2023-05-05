@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useParams } from "react-router-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { schematizeService } from "../dao/ServicioDao";
@@ -25,85 +25,92 @@ export default function Factura({ session }) {
     const _factura = schematizeFactura(factura);
     const state_style = factura.estado.toLowerCase() == "pagado" ? styles.state_activo : styles.state_inactivo;
     return (
-        <View style={styles.container}>
-            <View style={styles.icon_container}>
-                <Icon style={[styles.icon, state_style]} name={_factura.icono} />
-            </View>
-            <Text style={styles.title}>Factura de {_factura.fecha_mes}</Text>
-            <View style={styles.items}>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="event" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Emitido:</Text>
-                        <Text style={styles.item_desc}>{_factura.fecha_pago}</Text>
-                    </View>
-                    <View style={styles.item}>
-                        <Icon name="event-busy" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Vencimiento:</Text>
-                        <Text style={styles.item_desc}>{_factura.fecha_vencimiento}</Text>
-                    </View>
+        <ScrollView style={styles.scrollview}>
+            <View style={styles.container}>
+                <View style={styles.icon_container}>
+                    <Icon style={[styles.icon, state_style]} name={_factura.icono} />
                 </View>
-                {factura.estado.toLowerCase() != "pagado" ? (
+                <Text style={styles.title}>Factura de {_factura.fecha_mes}</Text>
+                <View style={styles.items}>
                     <View style={styles.row}>
                         <View style={styles.item}>
-                            <Icon name="check-circle-outline" style={styles.item_icon} />
-                            <Text style={styles.item_title}>Estado:</Text>
-                            <Text style={styles.item_desc}>{_factura.estado}</Text>
+                            <Icon name="event" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Emitido:</Text>
+                            <Text style={styles.item_desc}>{_factura.fecha_pago}</Text>
+                        </View>
+                        <View style={styles.item}>
+                            <Icon name="event-busy" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Vencimiento:</Text>
+                            <Text style={styles.item_desc}>{_factura.fecha_vencimiento}</Text>
                         </View>
                     </View>
-                ) : (
-                    <>
-                        <View style={styles.row}>
-                            <View style={styles.item}>
-                                <Icon name="celebration" style={styles.item_icon} />
-                                <Text style={styles.item_title}>Pagado en:</Text>
-                                <Text style={styles.item_desc}>{_factura.fecha_pagada}</Text>
-                            </View>
-                        </View>
+                    {factura.estado.toLowerCase() != "pagado" ? (
                         <View style={styles.row}>
                             <View style={styles.item}>
                                 <Icon name="check-circle-outline" style={styles.item_icon} />
                                 <Text style={styles.item_title}>Estado:</Text>
                                 <Text style={styles.item_desc}>{_factura.estado}</Text>
                             </View>
-                            <View style={styles.item}>
-                                <Icon name="payment" style={styles.item_icon} />
-                                <Text style={styles.item_title}>Forma de pago:</Text>
-                                <Text style={styles.item_desc}>{_factura.formapago}</Text>
-                            </View>
                         </View>
-                        <View style={styles.row}>
-                            <View style={styles.item}>
-                                <Icon name="monetization-on" style={styles.item_icon} />
-                                <Text style={styles.item_title}>Total:</Text>
-                                <Text style={styles.item_desc}>${_factura.total}</Text>
+                    ) : (
+                        <>
+                            <View style={styles.row}>
+                                <View style={styles.item}>
+                                    <Icon name="celebration" style={styles.item_icon} />
+                                    <Text style={styles.item_title}>Pagado en:</Text>
+                                    <Text style={styles.item_desc}>{_factura.fecha_pagada}</Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style={styles.row}>
-                            <View style={styles.item}>
-                                <Icon name="attach-money" style={styles.item_icon} />
-                                <Text style={styles.item_title}>Subtotal:</Text>
-                                <Text style={styles.item_desc}>${_factura.subtotal}</Text>
+                            <View style={styles.row}>
+                                <View style={styles.item}>
+                                    <Icon name="check-circle-outline" style={styles.item_icon} />
+                                    <Text style={styles.item_title}>Estado:</Text>
+                                    <Text style={styles.item_desc}>{_factura.estado}</Text>
+                                </View>
+                                <View style={styles.item}>
+                                    <Icon name="payment" style={styles.item_icon} />
+                                    <Text style={styles.item_title}>Forma de pago:</Text>
+                                    <Text style={styles.item_desc}>{_factura.formapago}</Text>
+                                </View>
                             </View>
-                            <View style={styles.item}>
-                                <Icon name="receipt" style={styles.item_icon} />
-                                <Text style={styles.item_title}>Impuesto:</Text>
-                                <Text style={styles.item_desc}>${_factura.impuesto}</Text>
+                            <View style={styles.row}>
+                                <View style={styles.item}>
+                                    <Icon name="monetization-on" style={styles.item_icon} />
+                                    <Text style={styles.item_title}>Total:</Text>
+                                    <Text style={styles.item_desc}>${_factura.total}</Text>
+                                </View>
                             </View>
-                        </View>
-                    </>
-                )}
+                            <View style={styles.row}>
+                                <View style={styles.item}>
+                                    <Icon name="attach-money" style={styles.item_icon} />
+                                    <Text style={styles.item_title}>Subtotal:</Text>
+                                    <Text style={styles.item_desc}>${_factura.subtotal}</Text>
+                                </View>
+                                <View style={styles.item}>
+                                    <Icon name="receipt" style={styles.item_icon} />
+                                    <Text style={styles.item_title}>Impuesto:</Text>
+                                    <Text style={styles.item_desc}>${_factura.impuesto}</Text>
+                                </View>
+                            </View>
+                        </>
+                    )}
+                </View>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+    scrollview: {
+        flex: 1,
+        backgroundColor: "#fff",
+    },
     container: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
+        paddingVertical: 20,
     },
     title: {
         fontSize: 18,

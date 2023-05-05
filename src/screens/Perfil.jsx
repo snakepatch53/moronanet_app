@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import LoadScreen from "../components/LoadScreen";
 import moment from "moment-timezone";
@@ -18,73 +18,79 @@ export default function Perfil({ session }) {
     if (parseInt(valor_mensual) == valor_mensual) valor_mensual = valor_mensual + ".00";
 
     return (
-        <View style={styles.container}>
-            <View style={styles.icon_container}>
-                <Icon style={styles.icon} name="person" />
+        <ScrollView style={styles.scrolllview}>
+            <View style={styles.container}>
+                <View style={styles.icon_container}>
+                    <Icon style={styles.icon} name="person" />
+                </View>
+                <Text style={styles.title}>{session.nombre}</Text>
+                <View style={styles.items}>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="portrait" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Cedula:</Text>
+                            <Text style={styles.item_desc}>{session.cedula || "no registrado"}</Text>
+                        </View>
+                        <View style={styles.item}>
+                            <Icon name="check-circle-outline" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Estado:</Text>
+                            <Text style={styles.item_desc}>{session.estado.toLowerCase() || "no registrado"}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="email" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Correo electrónico:</Text>
+                            <Text style={styles.item_desc}>{session.correo || "no registrado"}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="call" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Teléfono:</Text>
+                            <Text style={styles.item_desc}>{session.telefono || "no registrado"}</Text>
+                        </View>
+                        <View style={styles.item}>
+                            <Icon name="smartphone" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Celular:</Text>
+                            <Text style={styles.item_desc}>{session.movil || "no registrado"}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="place" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Dirección:</Text>
+                            <Text style={styles.item_desc}>{session.direccion_principal || "no registrado"}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.item}>
+                            <Icon name="attach-money" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Mensual:</Text>
+                            <Text style={styles.item_desc}>{valor_mensual || "no registrado"}</Text>
+                        </View>
+                        <View style={styles.item}>
+                            <Icon name="build" style={styles.item_icon} />
+                            <Text style={styles.item_title}>Servicios:</Text>
+                            <Text style={styles.item_desc}>{numero_servicios || "no registrado"}</Text>
+                        </View>
+                    </View>
+                </View>
             </View>
-            <Text style={styles.title}>{session.nombre}</Text>
-            <View style={styles.items}>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="portrait" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Cedula:</Text>
-                        <Text style={styles.item_desc}>{session.cedula || "no registrado"}</Text>
-                    </View>
-                    <View style={styles.item}>
-                        <Icon name="check-circle-outline" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Estado:</Text>
-                        <Text style={styles.item_desc}>{session.estado.toLowerCase() || "no registrado"}</Text>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="email" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Correo electrónico:</Text>
-                        <Text style={styles.item_desc}>{session.correo || "no registrado"}</Text>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="call" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Teléfono:</Text>
-                        <Text style={styles.item_desc}>{session.telefono || "no registrado"}</Text>
-                    </View>
-                    <View style={styles.item}>
-                        <Icon name="smartphone" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Celular:</Text>
-                        <Text style={styles.item_desc}>{session.movil || "no registrado"}</Text>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="place" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Dirección:</Text>
-                        <Text style={styles.item_desc}>{session.direccion_principal || "no registrado"}</Text>
-                    </View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.item}>
-                        <Icon name="attach-money" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Mensual:</Text>
-                        <Text style={styles.item_desc}>{valor_mensual || "no registrado"}</Text>
-                    </View>
-                    <View style={styles.item}>
-                        <Icon name="build" style={styles.item_icon} />
-                        <Text style={styles.item_title}>Servicios:</Text>
-                        <Text style={styles.item_desc}>{numero_servicios || "no registrado"}</Text>
-                    </View>
-                </View>
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+    scrolllview: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
+        paddingVertical: 30,
     },
     title: {
         fontSize: 18,

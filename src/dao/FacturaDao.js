@@ -4,7 +4,7 @@ import { fetch_query } from "./fetch_query";
 // api querys
 export async function selectByClientId(idcliente) {
     const invoices = await fetch_query("GetInvoices", { idcliente });
-    if (invoices.estado == "error") return [];
+    if (invoices.estado == "error") return false;
     return invoices.facturas;
 }
 

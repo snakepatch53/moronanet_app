@@ -8,8 +8,8 @@ export default ServiceItem = ({ session, servicio }) => {
     session.estado = session.estado.toLowerCase();
     const state_style = session.estado.includes("activo") ? styles.state_activo : styles.state_inactivo;
     return (
-        <Link to={"/servicio/" + service.id} style={styles.container} underlayColor="#ddd" component={TouchableOpacity}>
-            <>
+        <Link to={"/servicio/" + service.id} style={styles.container} underlayColor="transparent" component={TouchableOpacity}>
+            <View style={styles.shadow}>
                 <Icon style={styles.icon} name={service.icon_nombre} />
                 <View style={styles.texts_container}>
                     <Text style={styles.text}>Plan {service.plan_nombre}</Text>
@@ -23,13 +23,17 @@ export default ServiceItem = ({ session, servicio }) => {
                         <Text style={[styles.state_text2, state_style]}>{session.estado.charAt(0).toUpperCase() + session.estado.slice(1)}</Text>
                     </View>
                 </View>
-            </>
+            </View>
         </Link>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        padding: 10,
+        width: "100%",
+    },
+    shadow: {
         flexDirection: "row",
         alignItems: "center",
         gap: 10,
@@ -40,8 +44,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         shadowColor: "#000",
         shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        shadowRadius: 3,
+        elevation: 3,
     },
     icon: {
         fontSize: 30,
