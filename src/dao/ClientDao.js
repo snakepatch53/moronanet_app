@@ -62,7 +62,8 @@ function schematizeSession(session) {
     _session.nombre = _session.nombre.replace("(factura)", "");
     _session.nombre = _session.nombre.replace("(recibo)", "");
     // capitalizar nombre
-    _session.nombre = _session.nombre.charAt(0).toUpperCase() + _session.nombre.slice(1);
-
+    // algoritmo para poner las primeras letras en mayusculas
+    let nombre = _session.nombre.split(" ").map((palabra) => palabra.charAt(0).toUpperCase() + palabra.toLowerCase().slice(1));
+    _session.nombre = nombre.join(" ");
     return _session;
 }
