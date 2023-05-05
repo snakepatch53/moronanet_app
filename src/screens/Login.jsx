@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { APP_LOGO_URI } from "@env";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-native";
 import { login } from "../dao/ClientDao";
 
@@ -10,56 +10,82 @@ const Login = ({ setSession }) => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [message, setMessage] = useState("");
+    const refInputPass = useRef(null);
+
     const navigate = useNavigate();
 
     const handleLogin = async () => {
         const session = await login(cedula, password, navigate, setMessage);
         if (session) setSession(session);
     };
-
     return (
-        <View style={styles.container}>
-            <Image style={styles.image} source={{ uri: APP_LOGO_URI }} />
-            <Text style={styles.title}>Bienvenido al portal</Text>
+        <KeyboardAvoidingView style={styles.container}>
+            <View style={styles.content}>
+                <Image style={styles.image} source={{ uri: APP_LOGO_URI }} />
+                <Text style={styles.title}>Bienvenido al portal</Text>
 
-            <View style={styles.label}>
-                <Icon style={styles.label_icon} name="person" />
-                <Text style={styles.label_text}>Ingresa tu cédula: </Text>
-            </View>
+                <View style={styles.label}>
+                    <Icon style={styles.label_icon} name="person" />
+                    <Text style={styles.label_text}>Ingresa tu cédula: </Text>
+                </View>
 
-            <View style={styles.input_container}>
-                <TextInput onChangeText={setCedula} value={cedula} placeholder="Número de cedula" keyboardType="numeric" style={styles.input} />
-            </View>
+                <View style={styles.input_container}>
+                    <TextInput
+                        onChangeText={setCedula}
+                        value={cedula}
+                        placeholder="Número de cedula"
+                        keyboardType="numeric"
+                        style={styles.input}
+                        returnKeyType="next"
+                        onSubmitEditing={() => refInputPass.current.focus()}
+                    />
+                </View>
 
-            <View style={styles.label}>
-                <Icon style={styles.label_icon} name="lock" />
-                <Text style={styles.label_text}>Ingresa tu contraseña: </Text>
-            </View>
+                <View style={styles.label}>
+                    <Icon style={styles.label_icon} name="lock" />
+                    <Text style={styles.label_text}>Ingresa tu contraseña: </Text>
+                </View>
 
-            <View style={styles.input_container}>
-                <TextInput onChangeText={setPassword} placeholder="Contraseña" secureTextEntry={!showPassword} style={styles.input} />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                    <Icon style={styles.input_icon} name={showPassword ? "visibility" : "visibility-off"} />
+                <View style={styles.input_container}>
+                    <TextInput
+                        onChangeText={setPassword}
+                        placeholder="Contraseña"
+                        secureTextEntry={!showPassword}
+                        style={styles.input}
+                        ref={refInputPass}
+                        returnKeyType="send"
+                        onSubmitEditing={handleLogin}
+                    />
+                    <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                        <Icon style={styles.input_icon} name={showPassword ? "visibility" : "visibility-off"} />
+                    </TouchableOpacity>
+                </View>
+
+                <Text style={styles.message}>{message}</Text>
+
+                <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                    <Text style={styles.button_text}>Iniciar session</Text>
                 </TouchableOpacity>
             </View>
-
-            <Text style={styles.message}>{message}</Text>
-
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.button_text}>Iniciar session</Text>
-            </TouchableOpacity>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: "100%",
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
+    },
+    content: {
+        // flex: 1,
+        // width: "100%",
+        // // minHeight: Dimensions.get("window").height,
+        // backgroundColor: "#fff",
+        // alignItems: "center",
+        // justifyContent: "center",
         padding: 20,
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
     image: {
         width: 150,
@@ -99,9 +125,10 @@ const styles = StyleSheet.create({
     input_container: {
         flexDirection: "row",
         width: "100%",
+        backgroundColor: "#f7f7f7",
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "#eeeeee",
+        borderColor: "#dddddd",
     },
 
     input: {

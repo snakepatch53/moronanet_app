@@ -4,7 +4,7 @@
         "slug": "moronanet_app",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/icon.png",
+        "icon": "./assets/app_icon.png",
         "userInterfaceStyle": "light",
         "splash": {
             "image": "./assets/splash.png",
@@ -24,7 +24,7 @@
             "package": "com.snakepatch53.moronanet_app"
         },
         "web": {
-            "favicon": "./assets/favicon.png"
+            "favicon": "./assets/app_icon.png"
         },
         "extra": {
             "eas": {
