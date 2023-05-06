@@ -17,6 +17,7 @@
             "bundleIdentifier": "moronanet"
         },
         "android": {
+            "versionCode": 2,
             "adaptiveIcon": {
                 "foregroundImage": "./assets/app_icon.png",
                 "backgroundColor": "#ffffff"
